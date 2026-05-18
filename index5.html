@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Đang chuyển hướng đến TikTok...</title>
+<meta name="robots" content="noindex, nofollow">
+
+<style>
+  :root {
+    --primary-color: #ff0050;    /* Màu hồng đỏ đặc trưng TikTok */
+    --secondary-color: #00f2fe;  /* Màu xanh cyan đặc trưng TikTok */
+    --bg-color: #0f172a;         /* Màu nền tối sâu */
+    --text-color: #ffffff;
+    --text-muted: #94a3b8;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    height: 100vh;
+    background-color: var(--bg-color);
+    background-image: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+    color: var(--text-color);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 20px;
+  }
+
+  /* Khung nội dung hiệu ứng kính mờ sang trọng */
+  .redirect-box {
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    padding: 2.5rem 2rem;
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  /* Hiệu ứng xoay vòng kép TikTok */
+  .spinner-container {
+    position: relative;
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 1.8rem auto;
+  }
+
+  .spinner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 4px solid transparent;
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  }
+
+  .spinner-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 4px solid transparent;
+    border-radius: 50%;
+    border-bottom-color: var(--secondary-color);
+    animation: spin-reverse 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @keyframes spin-reverse {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  h1 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.5px;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 2rem;
+  }
+
+  /* Nút bấm cứu cánh khi chạy quảng cáo hoặc bị chặn bởi Facebook/Zalo trình duyệt */
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 15px 24px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #d60042 100%);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(255, 0, 80, 0.4);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 0, 80, 0.5);
+  }
+
+  .cta-button:active {
+    transform: translateY(0);
+  }
+
+  .footer-notice {
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    color: #475569;
+  }
+</style>
+</head>
+<body>
+
+  <div class="redirect-box">
+    <div class="spinner-container">
+      <div class="spinner"></div>
+      <div class="spinner-inner"></div>
+    </div>
+    
+    <h1>Đang kết nối tới TikTok</h1>
+    <p>Vui lòng đợi giây lát, hệ thống đang kích hoạt ứng dụng để ghi nhận ưu đãi và giỏ hàng của bạn...</p>
+    
+    <a href="#" class="cta-button" id="affiliate-btn">
+      Mở Ứng Dụng TikTok Ngay
+    </a>
+    
+    <div class="footer-notice">
+      Cookie Affiliate được kích hoạt an toàn.
+    </div>
+  </div>
+
+  <script>
+    // ====================================================================
+    // CẤU HÌNH ĐƯỜNG DẪN AFFILIATE CỦA BẠN TẠI ĐÂY
+    // Thay link ví dụ bên dưới bằng link sản phẩm/shop/chiến dịch của bạn
+    // ====================================================================
+    const AFFILIATE_URL = "https://vt.tiktok.com/ZXXXXXXXX/"; 
+    
+    // Thời gian chờ (mili-giây) trước khi tự động chuyển hướng (1500ms = 1.5 giây)
+    // Giữ tầm 1.5s là lý tưởng để trình duyệt kịp gửi request dính cookie và kích hoạt app link
+    const REDIRECT_DELAY = 1500; 
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const ctaButton = document.getElementById('affiliate-btn');
+      
+      // Gắn link vào nút bấm dự phòng ngay khi cấu trúc trang sẵn sàng
+      if (ctaButton) {
+        ctaButton.href = AFFILIATE_URL;
+      }
+
+      // Kích hoạt tự động điều hướng
+      setTimeout(() => {
+        /* Dùng window.location.href thay vì .replace() để ép các trình duyệt di động 
+          hiểu đây là một thao tác điều hướng URL mới từ người dùng. Hệ điều hành (iOS/Android) 
+          sẽ kiểm tra xem thiết bị có cài app TikTok hay không qua giao thức Universal Links/App Links, 
+          từ đó tự mở ứng dụng lên mà vẫn đảm bảo cookie được ghi nhận thành công từ trình duyệt.
+        */
+        window.location.href = AFFILIATE_URL;
+      }, REDIRECT_DELAY);
+    });
+  </script>
+
+</body>
+</html>
